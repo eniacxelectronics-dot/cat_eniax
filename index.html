@@ -1,146 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eniacx Techn Syst - Futurista 4D</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eniax Techn Syst - Futurista 4D</title>
 
-<!-- Fuente futurista -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fuente futurista -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- AOS Animaciones -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
 </head>
+
 <body>
 
-<!-- Fondo partículas -->
-<div id="particles-js"></div>
+  <!-- Fondo partículas -->
+  <div id="particles-js"></div>
 
-<header class="header-enx">
-  <canvas id="particles"></canvas>
-  <div class="hero-content">
-    <h1>⚡ Eniac Technology System ⚡</h1>
-    <p class="desc">Catálogo Futurista Eniacx — Donde la innovación se convierte en poder</p>
+  <header class="header-enx">
+    <canvas id="particles"></canvas>
+    <div class="header-grid-line"></div>
+    <div class="hero-content">
+      <div class="eyebrow"><span class="status-dot"></span> ENIAX / SYSTEM ONLINE <span class="eyebrow-code">v.04</span></div>
+      <h1>Eniax Techology<br><em>System´s.</em></h1>
+      <p class="desc">Explora una selección de tecnología, accesorios y gadgets listos para integrarse a tu mundo.</p>
+      <div class="hero-meta"><span>01 / CATÁLOGO DIGITAL</span><span>IA CURATED</span><span>MX · 2026</span></div>
+    </div>
+    <div class="hero-orbit orbit-one"></div>
+    <div class="hero-orbit orbit-two"></div>
+  </header>
+
+  <!-- Catálogo -->
+  <main class="catalog-shell">
+    <div class="catalog-heading">
+      <div>
+        <p class="section-kicker">// INVENTARIO DISPONIBLE</p>
+        <h2>Encuentra tu <span>próximo upgrade</span></h2>
+      </div>
+      <div class="catalog-signal"><span></span><strong id="product-count">0</strong> productos sincronizados</div>
+    </div>
+    <div class="catalog-tools">
+      <div id="catalogo"></div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div class="modal-content">
+      <span class="cerrar">&times;</span>
+      <img id="modal-img" src="" alt="">
+      <h2 id="modal-nombre"></h2>
+      <p id="modal-descripcion"></p>
+      <p id="modal-marca"></p>
+      <p id="modal-precio"></p>
+      <p id="modal-estado"></p>
+      <button id="btn-carrito">🛒 Agregar al carrito</button>
+    </div>
   </div>
-</header>
 
-
-<main id="catalogo"></main>
-
-<!-- JavaScript al final -->
-<script>
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = 350;
-
-let particlesArray = [];
-const numParticles = 60;
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 1 - 0.5;
-    this.speedY = Math.random() * 1 - 0.5;
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if(this.x<0 || this.x>canvas.width) this.speedX*=-1;
-    if(this.y<0 || this.y>canvas.height) this.speedY*=-1;
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx.fillStyle="#00eaff";
-    ctx.shadowBlur = 15;
-    ctx.shadowColor="#00ffff";
-    ctx.fill();
-  }
-}
-
-function init() {
-  particlesArray = [];
-  for(let i=0;i<numParticles;i++){
-    particlesArray.push(new Particle());
-  }
-}
-
-function animate() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particlesArray.forEach(p=>{p.update(); p.draw();});
-  connectParticles();
-  requestAnimationFrame(animate);
-}
-
-function connectParticles(){
-  for(let a=0;a<particlesArray.length;a++){
-    for(let b=a;b<particlesArray.length;b++){
-      const dx=particlesArray[a].x-particlesArray[b].x;
-      const dy=particlesArray[a].y-particlesArray[b].y;
-      const distance=Math.sqrt(dx*dx+dy*dy);
-      if(distance<100){
-        ctx.strokeStyle="rgba(0,234,255,0.2)";
-        ctx.lineWidth=1;
-        ctx.beginPath();
-        ctx.moveTo(particlesArray[a].x,particlesArray[a].y);
-        ctx.lineTo(particlesArray[b].x,particlesArray[b].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-init();
-animate();
-
-window.addEventListener("resize",()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=350;
-  init();
-});
-</script>
-
-<!-- Modal Detalle -->
-<div id="modal">
-  <div class="modal-content">
-    <span class="cerrar">&times;</span>
-    <img id="modal-img" src="" alt="">
-    <h2 id="modal-nombre"></h2>
-    <p id="modal-descripcion"></p>
-    <p id="modal-marca"></p>
-    <p id="modal-precio"></p> <!-- Descripción -->
-    <p id="modal-estado"></p> <!-- Disponible o Agotado -->
-    <button id="btn-carrito">🛒 Agregar al carrito</button>
+  <div id="cart-modal" aria-hidden="true">
+    <div class="cart-modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">&times;</button>
+      <p class="section-kicker">// PEDIDO EN CURSO</p>
+      <h2 id="cart-title">Tu carrito</h2>
+      <div id="cart-items"></div>
+      <div class="cart-summary">
+        <span>Total estimado</span>
+        <strong id="cart-total">$0</strong>
+      </div>
+      <button id="checkout-whatsapp" class="checkout-button">Pagar por WhatsApp</button>
+    </div>
   </div>
-</div>
 
-<script src="https://unpkg.com/particles.js@2.0.0/particles.min.js"></script>
-<script src="https://unpkg.com/gsap@3.15.0/dist/gsap.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="script.js"></script>
-<script>
-  
-//* Configuración de partículas */
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-    "color": { "value": "#00ffff" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-    "size": { "value": 3, "random": true, "anim": { "enable": false } },
-    "line_linked": { "enable": true, "distance": 150, "color": "#00ffff", "opacity": 0.5, "width": 1 },
-    "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-    "modes": { "grab": { "distance": 150, "line_linked": { "opacity": 0.7 } }, "push": { "particles_nb": 4 } }
-  },
-  "retina_detect": true
-});
-</script>
+  <!-- Librerías -->
+  <script src="https://unpkg.com/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/particles-canvas.js"></script>
+  <script src="js/particles-config.js"></script>
+  <script src="js/script.js"></script>
+
 </body>
 </html>
