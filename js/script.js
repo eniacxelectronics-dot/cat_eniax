@@ -340,7 +340,7 @@ checkoutWhatsapp && checkoutWhatsapp.addEventListener('click', () => {
   const total = carrito.reduce((sum, producto) => sum + (getSalePrice(producto) || getNumericPrice(producto.precio)), 0);
   const totalTexto = total ? formatPrice(total) : 'Consultar precio';
   const mensaje = `Hola, quiero realizar este pedido:\n${resumen}\nTotal estimado: ${totalTexto}`;
-  window.open(`https://wa.me/5218343503231?text=${encodeURIComponent(mensaje)}`, '_blank');
+  window.open(`https://wa.me/52${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`, '_blank');
 });
 
 cartClose && cartClose.addEventListener('click', closeCartModal);
