@@ -20,7 +20,7 @@
   <!-- Fondo partículas -->
   <div id="particles-js"></div>
 
-  <header class="header-enx">
+  <header id="top" class="header-enx">
     <canvas id="particles"></canvas>
     <div class="header-grid-line"></div>
     <div class="hero-content">
@@ -43,7 +43,18 @@
       <div class="catalog-signal"><span></span><strong id="product-count">0</strong> productos sincronizados</div>
     </div>
     <div class="catalog-tools">
+      <div class="catalog-toolbar" aria-label="Filtros del catálogo">
+        <div class="filter-tabs" role="tablist" aria-label="Categorías">
+          <button class="filter-tab is-active" data-filter="all" role="tab" aria-selected="true">Todo</button>
+          <button class="filter-tab" data-filter="ofertas" role="tab" aria-selected="false">Ofertas</button>
+          <button class="filter-tab" data-filter="audio" role="tab" aria-selected="false">Audio</button>
+          <button class="filter-tab" data-filter="gaming" role="tab" aria-selected="false">Gaming</button>
+          <button class="filter-tab" data-filter="smart" role="tab" aria-selected="false">Smart</button>
+        </div>
+        <div class="catalog-view-note"><span class="view-pulse"></span> Vista inmersiva activada</div>
+      </div>
       <div id="catalogo"></div>
+      <p id="empty-results" class="empty-results" hidden>No encontramos productos con esos parámetros.</p>
     </div>
   </main>
 
@@ -74,6 +85,42 @@
       <button id="checkout-whatsapp" class="checkout-button">Pagar por WhatsApp</button>
     </div>
   </div>
+
+  <footer class="site-footer">
+    <div class="footer-scanline"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-mark"><span></span> ENIAX / TECH SYSTEM</div>
+        <p> Tecnología útil, accesorios inteligentes y upgrades para tu día a día.</p>
+        <div class="footer-status"><span></span> SISTEMA OPERATIVO <b>·</b> CATÁLOGO ACTUALIZADO 2026</div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Navegación</h3>
+        <a href="#catalogo">Explorar catálogo</a>
+        <a href="#catalogo">Ofertas activas</a>
+        <a href="#top">Volver arriba <span>↗</span></a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Atención</h3>
+        <a href="https://wa.me/8343503231" target="_blank" rel="noopener">WhatsApp de ventas <span>↗</span></a>
+        <a href="mailto:soporte@eniax.tech">Soporte y pedidos</a>
+        <p class="footer-availability">Respuesta rápida para cotizaciones y disponibilidad.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-identity">
+        <span>© 2026 ENIAX TECH SYSTEM</span>
+        <span>VERACRUZ · ACAYUCAN · QUERÉTARO</span>
+      </div>
+      <div class="footer-legal-row">
+        <span>Todos los derechos reservados</span>
+        <span>Catálogo, contenido e identidad visual propiedad de ENIAX</span>
+        <span>INTERFACE / 04.26</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Librerías -->
   <script src="https://unpkg.com/particles.js@2.0.0/particles.min.js"></script>

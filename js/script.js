@@ -205,6 +205,13 @@ function isQuotePrice(precio){
   return typeof precio === 'string';
 }
 
+function getProductCategory(producto){
+  const text = `${producto.nombre} ${producto.descripcion}`.toLowerCase();
+  if (/(aud[ií]fono|bocina|sonido|airpod)/.test(text)) return 'audio';
+  if (/(xbox|gamer|gaming|monitor|teclado|mouse|pc gaming|alfombrilla)/.test(text)) return 'gaming';
+  return 'smart';
+}
+
 // ordenar lista para poner productos disponibles en la ciudad del usuario al inicio (IA)
 productos.sort((a,b)=>{
   const aOk = locationMatches(a.ubicaciones) ? 0 : 1;
@@ -218,6 +225,8 @@ productos.forEach(producto => {
   const div = document.createElement("div");
   div.classList.add("producto");
   const descuento = getDiscount(producto);
+  div.dataset.category = getProductCategory(producto);
+  div.dataset.sale = descuento ? 'true' : 'false';
   const precioFinal = getSalePrice(producto);
   const precioMarkup = isQuotePrice(producto.precio)
     ? '<div class="quote-price"><span class="quote-label">Precio personalizado</span><span class="quote-action">Solicitar cotización <b>↗</b></span></div>'
@@ -236,6 +245,19 @@ productos.forEach(producto => {
 
   const btn = div.querySelector('.ver-btn');
   btn.addEventListener('click', ()=> openDetalle(producto));
+
+  div.addEventListener('pointermove', event => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bounds = div.getBoundingClientRect();
+    const rotateY = ((event.clientX - bounds.left) / bounds.width - .5) * 8;
+    const rotateX = ((event.clientY - bounds.top) / bounds.height - .5) * -8;
+    div.style.setProperty('--tilt-x', `${rotateX}deg`);
+    div.style.setProperty('--tilt-y', `${rotateY}deg`);
+  });
+  div.addEventListener('pointerleave', () => {
+    div.style.setProperty('--tilt-x', '0deg');
+    div.style.setProperty('--tilt-y', '0deg');
+  });
 });
 
 if(productCount) productCount.textContent = productos.length;
@@ -387,24 +409,42 @@ if(typeof particlesJS!=="undefined"){
   });
 }
 
-// Buscador simple
+// Buscador y filtros combinados
 const searchInput = document.getElementById('search');
 const aiIndicator = document.getElementById('aiSearchIndicator');
-if(searchInput){
-  searchInput.addEventListener('input',(e)=>{
-    const q = e.target.value.toLowerCase().trim();
+const filterTabs = document.querySelectorAll('.filter-tab');
+const emptyResults = document.getElementById('empty-results');
+let activeFilter = 'all';
+
+function applyFilters(){
+    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
     if(aiIndicator){
-      aiIndicator.textContent = '🤖 IA analizando...';
-      setTimeout(()=>{ aiIndicator.textContent = '🔍 IA'; }, 800);
+      aiIndicator.textContent = q ? 'IA analizando...' : 'IA lista';
     }
     let visibleProducts = 0;
     document.querySelectorAll('.producto').forEach(card=>{
-      const title = card.querySelector('h3').textContent.toLowerCase();
-      const isVisible = title.includes(q);
-      card.style.display = isVisible ? 'block' : 'none';
-      if(isVisible) visibleProducts += 1;
+      const searchable = card.textContent.toLowerCase();
+      const categoryMatches = activeFilter === 'all'
+        || (activeFilter === 'ofertas' && card.dataset.sale === 'true')
+        || card.dataset.category === activeFilter;
+      const isVisible = categoryMatches && searchable.includes(q);
+      card.classList.toggle('is-hidden', !isVisible);
+      if (isVisible) visibleProducts += 1;
     });
     if(productCount) productCount.textContent = visibleProducts;
-  });
+    if(emptyResults) emptyResults.hidden = visibleProducts !== 0;
 }
+
+if(searchInput) searchInput.addEventListener('input', applyFilters);
+filterTabs.forEach(tab => tab.addEventListener('click', () => {
+  activeFilter = tab.dataset.filter;
+  filterTabs.forEach(item => {
+    const isActive = item === tab;
+    item.classList.toggle('is-active', isActive);
+    item.setAttribute('aria-selected', String(isActive));
+  });
+  applyFilters();
+}));
+
+applyFilters();
 
