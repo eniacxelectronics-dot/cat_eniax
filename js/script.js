@@ -27,6 +27,9 @@ const productos = [
   { nombre: "Impresora De Código De Barras", archivo: "imprcod.webp", precio: 2599, marca: "Holyhah", descripcion: "Impresora Térmica De Recibos Pos De 80 Mm.", ubicaciones: ["Queretaro", "Veracruz"] },
   { nombre: "Tarjeta DDR 1TB Kingston", archivo: "kingst.webp", precio: 3599, marca: "Kingston", descripcion: "Memoria RAM DDR de 1TB de alta velocidad.", ubicaciones: ["Queretaro", "Veracruz"] },
   { nombre: "Cargador y Lámpara Inteligente Diseño G", archivo: "lampar.webp", precio: 699, marca: "TechNova", descripcion: "Lámpara con control por app y cargador para iPhone.", ubicaciones: ["Queretaro"] },
+  { nombre: "Laptop Lenovo Yoga Slim 7 IA Ultra 7 32GB 1TB SSD 2K", archivo: "yog.webp", precio: 41999, marca: "Lenovo", descripcion: "Laptop Lenovo Yoga Slim 7 IA Ultra 7 32GB 1TB SSD 2K. Esta cuesta $41999.", ubicaciones: ["Queretaro"] },
+  { nombre: "Portátil Lenovo Legion Pro 5 G10 AMD Ryzen 7 32GB 1TB + AI Eclipse Black", archivo: "leg.webp", precio: 50899, marca: "Lenovo", descripcion: "Portátil Lenovo Legion Pro 5 G10 Amd Ryzen 7 32gb 1tb + Ai Eclipse Black cuesta $ 50899", ubicaciones: ["Queretaro"] },
+  { nombre: "Laptop Gamer Loq 32GB RAM 512GB SSD RTX 5050 Gris Lenovo", archivo: "lq.webp", precio: 33799, marca: "Lenovo", descripcion: "Laptop Gamer Loq 32gb Ram 512gb Ssd Rtx 5050 Gris Lenovo y cuesta 33799", ubicaciones: ["Queretaro"] },
   { nombre: "Laptop Gamer HP Victus 15.6", archivo: "lapamdryzen.webp", precio: 22899, marca: "HP", descripcion: "HP Victus Ryzen 7 16GB RAM 512SSD RTX4050.", ubicaciones: ["Queretaro"] },
   { nombre: "Lector de Código", archivo: "letcod.webp", precio: 999, marca: "Shawty", descripcion: "Lector de código de barras rápido y confiable.", ubicaciones: ["Queretaro"] },
   { nombre: "Lector de Código De Escritorio", archivo: "lectcodesc.webp", precio: 1899, marca: "Shawty", descripcion: "Lector Inalámbrico con Mini Receptor USB.", ubicaciones: ["Queretaro"] },
@@ -37,6 +40,7 @@ const productos = [
   { nombre: "Monitor Gamer 21.5", archivo: "mon21.5.webp", precio: 6999, marca: "Xiaomi", descripcion: "Panel IPS sRGB 99% HDR10.", ubicaciones: ["Queretaro"] },
   { nombre: "Monitor Gamer G27i", archivo: "monitorxiao27.webp", precio: 6999, marca: "Xiaomi", descripcion: "Monitor 27'' Full HD.", ubicaciones: ["Queretaro"] },
   { nombre: "Monitor Gamer Curvo 24.5", archivo: "montisams24.webp", precio: 6999, marca: "GAMER", descripcion: "Monitor curvo gamer.", ubicaciones: ["Queretaro"] },
+  { nombre: "Teclado USB Grande Antiestrés con Tecla Enter Key Negro", archivo: "push.webp", precio: 449, marca: "OEM", descripcion: "Teclado USB grande antiestrés con tecla Enter Key color negro.", ubicaciones: ["Queretaro"] },
   { nombre: "Mouse Inalámbrico tactil", archivo: "mousein.webp", precio: 499, marca: "GAMER", descripcion: "Mouse inalámbrico ergonómico.", ubicaciones: ["Acayucan"] },
   { nombre: "Protector De Cámara", archivo: "protcam.webp", precio: 299, marca: "GAMER", descripcion: "Protector de cámara para móviles.", ubicaciones: ["Acayucan"] },
   { nombre: "Punto de Venta Digital", archivo: "puntdig.webp", precio: 13999, marca: "TechNova", descripcion: "Sistema digital para punto de venta.", ubicaciones: ["Queretaro"] },
@@ -47,6 +51,7 @@ const productos = [
   { nombre: "Impresora Multifuncional Canon", archivo: "imprcan.webp", precio: 6599, marca: "Canon", descripcion: "Multifuncional Canon G3110.", ubicaciones: ["Queretaro"] },
   { nombre: "Impresora Multifuncional Epson", archivo: "impreps.webp", precio: 9999, marca: "Epson", descripcion: "Epson Ecotank L5590.", ubicaciones: ["Queretaro"] },
   { nombre: "Pc Gaming Computadora", archivo: "pcgam.webp", precio: 20999, marca: "Gamer", descripcion: "Intel Core I5 12400, 16gb, 500gb SSD.", ubicaciones: ["Queretaro"] },
+  { nombre: "Computadora Escritorio Completa Xtreme PC Gaming", archivo: "pc11.webp", precio: 18999, marca: "Xtreme PC Gaming", descripcion: "Computadora de escritorio completa con Intel Core i5, 16GB de RAM, SSD de 1TB, monitor curvo de 23.8 pulgadas a 100Hz y WiFi, ideal para juegos, trabajo y estudio.", ubicaciones: ["Queretaro"] },
   { nombre: "Turbo Cargador 67w", archivo: "cargrap.webp", precio: 399, marca: "Jeeyee", descripcion: "Turbo cargador rápido con cable Tipo C.", ubicaciones: ["Queretaro"] },
   { nombre: "Router Wifi 300Mbps", archivo: "routlink.webp", precio: 2199, marca: "Tp-Link", descripcion: "TP-Link TL-WR840N.", ubicaciones: ["Queretaro"] },
   { nombre: "Batería Portátil 38600mah", archivo: "PWRBAN.webp", precio: 1299, marca: "Hyboer", descripcion: "Cargador portátil de carga rapida.", ubicaciones: ["Veracruz"] },
@@ -121,14 +126,14 @@ const userLocations = ubicacionUsuario
   .filter(Boolean);
 
 const descuentos = new Map([
-  ['Audífonos Inalámbricos Bluetooth Xiaomi', 10],
-  ['Correas Para Reloj Smartwatch', 15],
-  ['Cabeza de carga rápida tipo C-C', 8],
-  ['Mouse Ergonomico RGB Vertical con cable para mano derecha', 12],
-  ['Bocina De Colores', 10],
-  ['Cargador y Lámpara Inteligente Diseño G', 15],
-  ['Turbo Cargador 67w', 8],
-  ['Smartwatch Duo Pack', 12]
+  ['Audífonos Inalámbricos Bluetooth Xiaomi', 5],
+  ['Correas Para Reloj Smartwatch', 8],
+  ['Cabeza de carga rápida tipo C-C', 5],
+  ['Mouse Ergonomico RGB Vertical con cable para mano derecha', 7],
+  ['Bocina De Colores', 5],
+  ['Cargador y Lámpara Inteligente Diseño G', 10],
+  ['Turbo Cargador 67w', 5],
+  ['Smartwatch Duo Pack', 8]
 ]);
 
 function normalizeLoc(loc){
@@ -221,7 +226,6 @@ productos.sort((a,b)=>{
 
 // Crear catálogo y tarjetas actualizadas
 productos.forEach(producto => {
-  const aiScore = Math.floor(Math.random() * 21) + 80; // 80-100 IA evaluation
   const div = document.createElement("div");
   div.classList.add("producto");
   const descuento = getDiscount(producto);
@@ -234,7 +238,6 @@ productos.forEach(producto => {
     ? `<div class="price-row"><span class="old-price">$${producto.precio.toLocaleString('es-MX')}</span><span class="discount-pill">-${descuento}%</span></div><strong class="sale-price">$${precioFinal.toLocaleString('es-MX')}</strong>`
     : `<strong class="sale-price regular-price">${formatPrice(producto.precio)}</strong>`;
   div.innerHTML = `
-    <div class="ai-badge">SELECCIÓN ${aiScore}%</div>
     <div class="product-image"><img loading="lazy" src="${validarImagen(producto.archivo)}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/280x180?text=Sin+imagen'"></div>
     <h3>${producto.nombre}</h3>
     <p class="product-brand">${producto.marca}</p>
