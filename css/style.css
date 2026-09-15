@@ -129,55 +129,210 @@ header, main, #modal {
 
 .producto {
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(0,255,240,0.06);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-  border-radius:14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 430px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(13, 27, 34, 0.96), rgba(8, 18, 25, 0.96));
+  border: 1px solid rgba(110, 237, 255, 0.14);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(2, 8, 18, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   width:100%;
-  padding:14px;
-  text-align:center;
-  transition: transform 0.35s cubic-bezier(.2,.9,.2,1), box-shadow 0.35s;
+  text-align:left;
+  transition: transform 0.35s cubic-bezier(.2,.9,.2,1), box-shadow 0.35s ease, border-color 0.35s ease;
+  isolation: isolate;
+}
+
+.producto::before {
+  content: "";
+  position: absolute;
+  inset: -24% -10% auto auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(60, 220, 255, 0.25), transparent 62%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.producto:hover {
+  transform: translateY(-10px) scale(1.01);
+  border-color: rgba(102, 240, 255, 0.38);
+  box-shadow: 0 28px 60px rgba(2, 8, 18, 0.7), 0 0 32px rgba(45, 214, 255, 0.12);
 }
 
 .producto .ai-badge {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(0,255,240,0.9);
-  color: #021018;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 4px 6px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  background: linear-gradient(90deg, rgba(0,255,240,0.95), rgba(102, 229, 255, 0.8));
+  color: #04161e;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 9px;
+  border-radius: 999px;
+  box-shadow: 0 10px 20px rgba(0,255,240,0.18);
 }
 
-.producto:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(0,200,255,0.06), 0 2px 10px rgba(0,0,0,0.6);
+.producto .product-image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 220px;
+  margin: 0;
+  padding: 18px 18px 16px;
+  background: linear-gradient(180deg, rgba(7, 19, 26, 0.7), rgba(12, 26, 35, 0.85));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 1;
 }
 
-.producto img { max-width:100%; border-radius:10px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.03)}
+.producto .product-image::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 18px;
+  pointer-events: none;
+}
 
-.producto h3 { font-size:1.05em; color:#9df6ff; margin-bottom:6px; min-height:40px }
+.producto img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+  margin: 0;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
 
-.producto p { font-size:0.92em; margin:6px 0; color:rgba(230,255,255,0.9)}
+.producto:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.producto h3 {
+  position: relative;
+  z-index: 1;
+  margin: 18px 18px 8px;
+  color: #eafcff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-height: 52px;
+  letter-spacing: 0.02em;
+}
+
+.producto .product-brand {
+  position: relative;
+  z-index: 1;
+  margin: 0 18px;
+  color: #7ce8ff;
+  font: 700 0.62rem/1.4 Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.producto .card-price {
+  position: relative;
+  z-index: 1;
+  margin: 14px 18px 0;
+  min-height: 60px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 18px;
+}
+
+.old-price {
+  color: rgba(176, 201, 210, 0.75);
+  font: 0.7rem Arial, sans-serif;
+  text-decoration: line-through;
+}
+
+.discount-pill {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(255, 123, 167, 0.14);
+  border: 1px solid rgba(255, 123, 167, 0.35);
+  color: #ff9fbb;
+  font: 700 0.58rem 'Orbitron', sans-serif;
+}
+
+.sale-price {
+  display: block;
+  margin-top: 6px;
+  color: #bafc7b;
+  font: 700 1.2rem 'Orbitron', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.regular-price {
+  padding-top: 18px;
+}
+
+.quote-price {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+}
+
+.quote-label {
+  color: #bafc7b;
+  font: 700 0.78rem 'Orbitron', sans-serif;
+}
+
+.quote-action {
+  color: #7ce8ff;
+  font: 0.66rem Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quote-action b {
+  font-size: 0.8rem;
+}
 
 .producto .ver-btn {
-  padding:9px 14px;
-  margin-top:8px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#00f0ff,#a100ff);
-  color:#021018;
-  font-weight:700;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 36px);
+  margin: auto 18px 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(120, 234, 255, 0.28);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,255,240,0.12), rgba(161, 0, 255, 0.18));
+  color: #dffeff;
+  font: 700 0.66rem 'Orbitron', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,160,200,0.12);
-  transition: transform .18s, box-shadow .18s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 20px rgba(0,0,0,0.18);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
-.producto .ver-btn:hover{ transform: translateY(-4px); box-shadow:0 18px 40px rgba(161,0,255,0.12)}
+.producto .ver-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(120, 234, 255, 0.7);
+  box-shadow: 0 18px 32px rgba(20, 221, 255, 0.14), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.producto .ver-btn b {
+  font-size: 1rem;
+}
 
 /* Modal */
 #modal {
@@ -578,7 +733,10 @@ body::before { background: linear-gradient(180deg, rgba(7,18,28,.18), rgba(7,18,
   display: flex;
   flex-direction: column;
   min-height: 408px;
-  background: linear-gradient(145deg, rgba(21, 47, 55, .96), rgba(8, 22, 31, .98));
+  background: linear-gradient(145deg, rgba(20, 43, 52, .96), rgba(8, 15, 24, .98));
+  border-radius: 22px; 
+  border: 1px solid rgba(101, 236, 255, .18);
+  box-shadow: 0 18px 40px rgba(7, 14, 20, .52), inset 0 1px 0 rgba(255,255,255,.07);
 }
 
 .producto .product-image {
@@ -588,15 +746,16 @@ body::before { background: linear-gradient(180deg, rgba(7,18,28,.18), rgba(7,18,
   height: 214px;
   padding: 18px;
   overflow: hidden;
-  background: radial-gradient(circle at center, rgba(98, 245, 221, .1), transparent 68%), #0b2029;
-  border-bottom: 1px solid rgba(98, 245, 221, .12);
+  background: linear-gradient(180deg, rgba(10, 24, 29, .9), rgba(11, 34, 38, .95));
+  border-bottom: 1px solid rgba(101, 236, 255, .12);
 }
 
 .producto .product-image::before {
   content: '';
   position: absolute;
-  inset: 12px;
+  inset: 14px;
   border: 1px solid rgba(215, 255, 98, .12);
+  border-radius: 18px;
   pointer-events: none;
 }
 
@@ -606,25 +765,25 @@ body::before { background: linear-gradient(180deg, rgba(7,18,28,.18), rgba(7,18,
   object-fit: contain;
   margin: 0;
   border: 0;
-  border-radius: 0;
-  filter: saturate(.92) contrast(1.03);
+  border-radius: 16px;
+  filter: saturate(.96) contrast(1.04);
   transition: transform .45s ease, filter .45s ease;
 }
 
 .producto:hover .product-image img { transform: scale(1.06); filter: saturate(1.12) contrast(1.04); }
 .producto h3 { flex: 1; margin: 17px 18px 6px; min-height: 44px; font-size: .82rem; line-height: 1.45; }
-.producto .product-brand { margin: 0 18px; color: #86a9aa; font: .67rem/1.4 Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; }
+.producto .product-brand { margin: 0 18px; color: #7ce8ff; font: 700 .67rem/1.4 Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; }
 .producto .card-price { min-height: 57px; margin: 10px 18px 0; }
 .price-row { display: flex; align-items: center; gap: 8px; min-height: 18px; }
-.old-price { color: #739194; font: .7rem Arial, sans-serif; text-decoration: line-through; }
-.discount-pill { padding: 4px 6px; border-radius: 2px; background: var(--pink); color: #160c12; font: 700 .59rem 'Orbitron', sans-serif; }
-.sale-price { display: block; margin-top: 3px; color: var(--lime); font: 700 1.18rem 'Orbitron', sans-serif; }
+.old-price { color: rgba(160, 187, 194, 0.8); font: .7rem Arial, sans-serif; text-decoration: line-through; }
+.discount-pill { padding: 4px 7px; border-radius: 999px; background: rgba(255, 123, 167, .12); border: 1px solid rgba(255, 123, 167, .28); color: #ff9fbb; font: 700 .59rem 'Orbitron', sans-serif; }
+.sale-price { display: block; margin-top: 3px; color: #bafc7b; font: 700 1.18rem 'Orbitron', sans-serif; }
 .regular-price { padding-top: 18px; }
 .quote-price { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; }
-.quote-label { color: var(--lime); font: 700 .88rem 'Orbitron', sans-serif; line-height: 1.25; }
-.quote-action { color: var(--cyan); font: .63rem Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.quote-label { color: #bafc7b; font: 700 .88rem 'Orbitron', sans-serif; line-height: 1.25; }
+.quote-action { color: #7ce8ff; font: .63rem Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
 .quote-action b { font-size: .8rem; }
-.producto .ver-btn { display: flex; justify-content: space-between; align-items: center; width: calc(100% - 36px); margin: 4px 18px 0; }
+.producto .ver-btn { display: flex; justify-content: space-between; align-items: center; width: calc(100% - 36px); margin: 4px 18px 18px; border: 1px solid rgba(120, 234, 255, 0.28); border-radius: 12px; background: linear-gradient(135deg, rgba(0,255,240,0.12), rgba(161, 0, 255, 0.18)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 22px rgba(0,0,0,0.18); }
 .producto .ver-btn b { font-size: 1rem; line-height: 1; }
 
 .modal-content {
