@@ -51,6 +51,7 @@ const productos = [
   { nombre: "Impresora Multifuncional Canon", archivo: "imprcan.webp", precio: 6599, marca: "Canon", descripcion: "Multifuncional Canon G3110.", ubicaciones: ["Queretaro"] },
   { nombre: "Impresora Multifuncional Epson", archivo: "impreps.webp", precio: 9999, marca: "Epson", descripcion: "Epson Ecotank L5590.", ubicaciones: ["Queretaro"] },
   { nombre: "Pc Gaming Computadora", archivo: "pcgam.webp", precio: 20999, marca: "Gamer", descripcion: "Intel Core I5 12400, 16gb, 500gb SSD.", ubicaciones: ["Queretaro"] },
+  { nombre: "Pc Gamer Ryzen 5 7600 32gb Ram 1tb Ssd Rx7600 650w Wifi", archivo: "pcc.webp", precio: 31499, marca: "OEM", descripcion: "# Pc Gamer Ryzen 5 7600 32gb Ram 1tb Ssd Rx7600 650w Wifi cuesta31499", ubicaciones: ["Queretaro"] },
   { nombre: "Computadora Escritorio Completa Xtreme PC Gaming", archivo: "pc11.webp", precio: 18999, marca: "Xtreme PC Gaming", descripcion: "Computadora de escritorio completa con Intel Core i5, 16GB de RAM, SSD de 1TB, monitor curvo de 23.8 pulgadas a 100Hz y WiFi, ideal para juegos, trabajo y estudio.", ubicaciones: ["Queretaro"] },
   { nombre: "Turbo Cargador 67w", archivo: "cargrap.webp", precio: 399, marca: "Jeeyee", descripcion: "Turbo cargador rápido con cable Tipo C.", ubicaciones: ["Queretaro"] },
   { nombre: "Router Wifi 300Mbps", archivo: "routlink.webp", precio: 2199, marca: "Tp-Link", descripcion: "TP-Link TL-WR840N.", ubicaciones: ["Queretaro"] },
